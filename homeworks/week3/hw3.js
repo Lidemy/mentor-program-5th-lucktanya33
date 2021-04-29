@@ -1,5 +1,5 @@
 
-/* eslint-disable */ 
+/* eslint-disable */
 //判斷是不是質數 檢查n 能不能被1~n當中除了1和n以外的數整除，如果不能就是質數
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -17,27 +17,28 @@ rl.on('line', function (line) {
 rl.on('close', function() {
   solve(lines)
 })
-
-//上面都不用管，只需要完成這個 function 就好，可以透過 lines[i] 拿取內容
+// 上面都不用管，只需要完成這個 function 就好，可以透過 lines[i] 拿取內容
+/* eslint-enable */
 function solve(lines) {
-    for(i=1; i<=(lines[0]); i++){
-    let quanInSeq = Number(lines[0])
-    let num = Number(lines[i])
-    if(primeInspect(num)){
-        console.log("Prime")
-    } else{
-        console.log("Composite")
+  for (let i = 1; i <= (lines[0]); i++) {
+    /* eslint-disable-next-line */
+    const quanInSeq = Number(lines[0])
+    const num = Number(lines[i])
+    if (primeInspect(num)) {
+      console.log('Prime')
+    } else {
+      console.log('Composite')
     }
-}
+  }
 }
 
-function primeInspect (num){
-    if(num ===1) return false
-    if(num ===2) return true
-    for(i=2; i<num; i++){
-        if(num % i === 0) {
-            return false
-        }
-    }  
-    return true
+function primeInspect(num) {
+  if (num === 1) return false
+  if (num === 2) return true
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) {
+      return false
+    }
+  }
+  return true
 }
