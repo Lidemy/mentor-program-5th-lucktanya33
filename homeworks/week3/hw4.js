@@ -37,7 +37,7 @@ function solve(lines) {
   const inputStr = lines[0]
   let StrRverse = '' // 宣告從後面數過來的變數
   const arr = inputStr.split('')
-  for (let i = arr.length - 1; i >= 0; i--) { // 為什麼終止條件是i>=0而不是i<0
+  for (let i = arr.length - 1; i >= 0; i--) { // 這邊不太懂，為什麼終止條件是i>=0而不是i<0
     StrRverse += arr[i]
   }
   if (inputStr === StrRverse) {

@@ -28,7 +28,7 @@ rl.on('close', function() {
 /* eslint-disable */
 function solve(lines) {
   // 5 200 => ['5', '200']
-  const temp = lines[0].split(' ')
+  const temp = lines[0].split(' ')// 用空格把lines[0]的5 200，用' '空格切開，切成array
   let from = Number(temp[0])
   let to = Number(temp[1])
   for (let i = from; i<=to; i++) {

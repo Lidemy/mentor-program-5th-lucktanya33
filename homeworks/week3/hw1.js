@@ -27,12 +27,12 @@ function solve(lines) {
 function printStar(n) {
   let layer = ''
   for (let i = 1; i <= n; i++) {
-    layer = multiply(i, '*') // 為什麼剛剛這一行寫 console.log(multiply(i,'*'))會印出五層5顆星星
-    console.log(layer)
+    layer = multiply(i, '*')// 這一行寫 console.log(multiply(i,'*'))會印出五層5顆星星
+    console.log(layer)// 不太了解如果用 return 寫要怎麼寫如果寫 return layer 只會印出1顆*
   }
 }
 
-function multiply(n, str) {
+function multiply(n, str) { // 實作字串的repeat功能
   let result = ''
   for (let i = 1; i <= n; i++) {
     result += str
