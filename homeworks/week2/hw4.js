@@ -4,15 +4,14 @@
 function findFactor(n) {
     var divisor = ''
     var answer = []
-    for (i= 1; i<=n; i++){
-        if (n % i ===0){   //如果這個除數可以整除，代表是因數
+    for (let i= 1; i <= n; i++) {
+        if (n % i === 0) {//如果這個除數可以整除，代表是因數
             divisor = i
             answer.push(divisor)
-            //console.log(divisor) //把 divisor 的值放進 result 陣列中
-        } else {
-        }  
+            //console.log(divisor) 把 divisor 的值放進 result 陣列中
+        } 
     }  
-    for (i=0; i<answer.length; i++){
+    for (let i = 0; i < answer.length; i++){
         console.log(answer[i])
     }
 }
