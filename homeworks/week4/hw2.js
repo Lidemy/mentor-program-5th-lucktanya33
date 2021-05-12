@@ -38,19 +38,33 @@ function listAllbooks() {
     if (err) {
       return console.log('列出失敗', err)
     }
-    const data = JSON.parse(body)
+
+    let data// 原來可以宣告變數不宣告型態
+    try { // 錯誤處理：回傳資料非json檔的時候
+      data = JSON.parse(body)
+    } catch (err) {
+      console.log('NOT JSON data')
+      return
+    }
     for (let i = 0; i <= data.length; i++) {
       console.log(data[i].id, data[i].name)
     }
   })
 }
+
 // 實作讀取某 id
 function readOnebook(actionContent) {
   request(apiUrl + actionContent, (err, res, body) => {
     if (err) {
       return console.log('抓取失敗', err)
     }
-    const data = JSON.parse(body)
+    let data// 原來可以宣告變數不宣告型態
+    try { // 錯誤處理：回傳資料非json檔的時候
+      data = JSON.parse(body)
+    } catch (err) {
+      console.log(err)
+      return
+    }
     console.log(data.name)
     console.log('讀取成功')
   })

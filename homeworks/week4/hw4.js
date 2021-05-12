@@ -14,7 +14,14 @@ request({
   if (err) {
     return console.log(err)
   }
-  const data = JSON.parse(body)// console.log(data)印出觀察資料的樣子
+
+  let data
+  try{
+    data = JSON.parse(body)// console.log(data)印出觀察資料的樣子
+  } catch (err) {
+    console.log('NOT JSON data')
+    return
+  }
   for (let i = 0; i <= data.top.length; i++) {
     console.log(data.top[i].viewers, data.top[i].game.name)// 這邊用[i]，印的出正解但會報錯.viewers this property undefined。但用數字就不會不知道為何
   }

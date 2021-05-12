@@ -6,11 +6,19 @@ const process = require('process')
 const apiUrl = 'https://restcountries.eu/rest/v2/name/'
 const args = process.argv
 /* eslint-disable-next-line */
-request(apiUrl + args[2], function(error, response, body) {
-  // console.error('error:', error); // Print the error if one occurred
-  // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  // console.log('body:', body); // Print the HTML for the Google homepage.
-  const contryData = JSON.parse(body)// console.log(contryData)
+request(apiUrl + args[2], function(err, response, body) {
+  if (err) { // 錯誤處理
+    console.log('error message:', err)
+    return
+  }
+  let contryData
+  try { // 錯誤處理：回傳資料非json檔的時候
+    contryData = JSON.parse(body)
+  } catch (err) {
+    console.log('NOT JSON data')
+    return
+  }
+
   console.log('============')
   console.log('國家', contryData[0].name)
   console.log('首都', contryData[0].capital)
