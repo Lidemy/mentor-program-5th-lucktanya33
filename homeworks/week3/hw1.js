@@ -21,16 +21,22 @@ rl.on('close', function() {
 /* eslint-enable */
 function solve(lines) {
   const m = lines[0]
-  printStar(m)
+  console.log(printStar(m))
 }
 
 function printStar(n) {
-  let layer = ''
-  for (let i = 1; i <= n; i++) {
-    layer = multiply(i, '*')// 這一行寫 console.log(multiply(i,'*'))會印出五層5顆星星
-    console.log(layer)// 不太了解如果用 return 寫要怎麼寫如果寫 return layer 只會印出1顆*
+  let layer = ''// layer是每一層的字串
+  let graph = ''// graph是整個圖案
+  for (let i = 1; i < n; i++) { // 先用for回圈印出n-1層，並且每一層都加換行
+    layer = multiply(i, '*')
+    /* eslint-disable-next-line */
+    graph += (layer + '\n')
   }
+  graph = graph + multiply(n, '*')// graph===n-1層再加上最後一層
+  return graph
 }
+
+// console.log(printStar(5))
 
 function multiply(n, str) { // 實作字串的repeat功能
   let result = ''

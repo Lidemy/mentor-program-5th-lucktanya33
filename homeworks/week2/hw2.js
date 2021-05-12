@@ -17,22 +17,24 @@ console.log(arr)*/
 //轉大寫的方法
 /*console.log('anya'.toUpperCase())*/
 
-var str = ""
-function capitalize(str){
-    var arr = str.split('')
-    var result = "" //console.log(arr)
-    var aCode = str.charCodeAt(0)
-    if (aCode>=65 && aCode <=90){ 
-        result = str
-    } else if(aCode>=97 && aCode<=122){
-        var s1 = str[0].toUpperCase()
-        //var s1 = arr[0] + '' //陣列第一個元素值轉為字串
-        var s2 = arr[1] + ''
-        var s3 = arr[2] + ''
-        var s4 = arr[3] + ''
-        result = s1.toUpperCase()+s2+s3+s4
-    } else {result = str}
+let str = ''
+function capitalize(str) {
+  let arr = str.split('')
+  let result = '' //console.log(arr)
+  let aCode = str.charCodeAt(0)
+
+	if (aCode >= 97 && aCode <= 122) {
+    let lettersFollowed = ''//首字後面的字
+    for (let i = 1; i < arr.length; i++) {
+		lettersFollowed += arr[i]//console.log(lettersFollowed)
+    }
+    let s1 = str[0].toUpperCase()
+    result = s1.toUpperCase() + lettersFollowed
+    } 
+	else {
+		result = str
+		}
 return result
 }
 
-console.log(capitalize('nick'))
+console.log(capitalize('!Tanya'))

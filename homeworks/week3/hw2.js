@@ -39,19 +39,12 @@ function solve(lines) {
 }
 
 function digitsCount(n) {
-    if (n < 10) {
-        return 1
-    } else if (n < 100) {
-        return 2
-    } else if (n < 1000) {
-        return 3
-    } else if (n < 10000) {
-        return 4
-    } else if (n < 100000) {
-        return 5
-    } else if (n < 1000000) {
-        return 6
-    }
+    if (n < 10) return 1
+    if (n < 100) return 2
+    if (n < 1000) return 3
+    if (n < 10000) return 4
+    if (n < 100000) return 5
+    if (n < 1000000) return 6
 }
 
 function isNarcissistic(n) {
@@ -63,10 +56,7 @@ function isNarcissistic(n) {
         sum += Math.pow(num,digits)
         m = Math.floor(m/10)//n如果是1634賦值完會是163
     }
-    if (sum === n) {
-        return true
-    } else {
-        return false
-    }
+    return sum === n//如果sum===n為真回傳true，否回傳false
+
 }
 //console.log(isNarcissistic(1634))

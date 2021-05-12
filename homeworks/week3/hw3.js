@@ -24,7 +24,7 @@ function solve(lines) {
     /* eslint-disable-next-line */
     const quanInSeq = Number(lines[0])
     const num = Number(lines[i])
-    if (primeInspect(num)) {
+    if (isPrime(num)) {
       console.log('Prime')
     } else {
       console.log('Composite')
@@ -32,7 +32,7 @@ function solve(lines) {
   }
 }
 
-function primeInspect(num) {
+function isPrime(num) {
   if (num === 1) return false
   if (num === 2) return true
   for (let i = 2; i < num; i++) {
