@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>hw2-新拖延運動</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+  <form class="main debug">
+    <div class="form debug">
+      <div class="form__top"></div>
+      <div class="form__title debug">
+        <div class="title__name debug">
+          新拖延運動報名表單
+        </div>
+        <div class="title__activityInfo debug">
+          <div class="activityInfo date">
+            活動日期：2020/12/10 ~ 2020/12/11
+          </div>
+          <div class="activityInfo loca">
+            活動地點：台北市大安區新生南路二段1號
+          </div>
+        </div>
+        <div class="title__must debug">
+          必填 *
+        </div>
+      </div>
+      <div class="form__basicInfo debug">
+         <div class="nickname debug">
+          <div class="nickname__title debug">
+            暱稱<span>&nbsp;*</span>
+          </div>
+          <input value="你的回答" class="input">
+        </div>
+         <div class="email debug">
+          <div class="email__title debug">
+            電子郵件<span>&nbsp;*</span>
+          </div>
+          <input value="你的回答" class="input">
+         </div>
+         <div class="phone debug">
+          <div class="phone__title debug">
+            手機號碼<span>&nbsp;*</span>
+          </div>
+          <input value="你的回答" class="input">
+         </div>
+      </div>
+      <div class="form__chooseType debug">
+        <div class="chooseType__title debug">
+          報名類型<span>&nbsp;*</span>
+        </div>
+        <div class="chooseType__option"> <!--checkbox 的寫法是在MDN上面複製過來的還不熟悉-->
+          <input type="checkbox" id="opt1" class="opt" value="laying"><!--這邊不知道為什麼CSS想用.opt選出 class改變裡面字體顏色沒辦法-->
+          <label for="opt1"> 躺在床上用想像力實作</label><br> 
+          <input type="checkbox" id="opt2" class="opt" value="scrolling">
+          <label for="opt2"> 趴在地上滑手機找現成的</label><br> 
+        </div>
+      </div>
+      <div class="form__otherInfo debug">
+        <div class="howto debug">
+          <div class="howto__title debug">
+            怎麼知道這個活動的？<span>&nbsp;*</span>
+          </div>
+          <input value="你的回答" class="input">
+        </div>
+        <div class="others debug">
+          <div class="others__title debug">其他</div>
+          <input value="你的回答" class="input">
+        </div>
+      </div>
+      <div class="form__submit debug">
+        <div class="submit__button debug">
+          <input type="button" value="提交" id="btn">
+        </div>
+        <div class="submit__reminder debug">請勿透過表單送出您的密碼。</div>
+      </div>
+    </div>
+  </form>
+  <div class="footer">
+    © 2020 © Copyright. All rights Reserved.
+  </div>
+  </body>
+</html>

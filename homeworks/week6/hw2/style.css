@@ -1,0 +1,202 @@
+/*.debug *, .debug{
+  outline: 1px solid gold;
+}*/
+
+body{
+  font-size: 20px;
+}
+span{
+  color: red;
+}
+
+input{
+border:solid 2px lightgray
+}
+
+.main{
+  height: 1340px;
+  margin: 0px;
+  background-color: lightgrey;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.footer{
+  height: 60px;
+  background-color: black  ;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center; /*對齊次軸中線*/
+  font-size: 14px;
+  color: #999999;
+}
+
+.input{
+  width: 280px;
+  height: 24px;
+  margin: 10px 0px 0px 0px;
+}
+
+.form{
+  width: 645px;
+  height:1100;
+  margin: 130px 200px 130px 200px;
+  background-color: white;
+}
+
+.form__top{
+  height: 8px;
+  background-color: #fad312;
+}
+
+.form__title{
+  height: 200px;
+  padding: 0px;
+  margin: 40px 40px 10px 40px;
+  box-sizing: border-box;
+}
+
+.title__name{
+  padding: 30px 0px 20px 0px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.activityInfo{
+  font-size: 14px;
+}
+
+.title__must{
+  font-size: 16px;
+  color: red;
+}
+
+.title__name{
+  height: 100px;
+  box-sizing: border-box;
+  font-size: 36px;
+}
+
+.title__activityInfo{
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.title__must{
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.form__basicInfo{
+  height: 300px;
+  padding: 0px;
+  margin: 10px 40px 10px 40px;
+  box-sizing: border-box;
+}
+
+.nickname {
+  height: 100px;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.email {
+  height: 100px;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.phone {
+  height: 100px;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+.form__chooseType{
+  height: 130px;
+  padding: 0px;
+  margin: 10px 40px 10px 40px;
+  box-sizing: border-box;
+}
+
+.chooseType__title{
+  height: 50px;
+  box-sizing: border-box;
+}
+
+label {
+  font-size: 14px;
+}
+
+.form__otherInfo{
+  height: 200px;
+  padding: 0px;
+  margin: 10px 40px 10px 40px;
+  box-sizing: border-box;
+}
+
+.howto {
+  height: 100px;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.others {
+  height: 100px;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.form__submit{
+  height:130px;
+  padding: 0px;
+  margin: 10px 40px 10px 40px;
+  box-sizing: border-box;
+}
+
+.submit__button{
+  height:60px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+#btn {
+  width: 90px;
+  height: 40px;
+  background-color: #fad312;
+  border:none;
+  transition: all 0.3s;
+}
+
+#btn:hover {
+  background-color:lightgrey;
+}
+
+.submit__reminder{
+  height:50px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.footer{
+  height: 60px;
+  background-color: black;
+  display: flex;
+}
+
+@media screen and (max-width:840px) {
+  .title__name{
+    height: 100px;
+    box-sizing: border-box;
+    font-size: 28px;
+  }
+}
