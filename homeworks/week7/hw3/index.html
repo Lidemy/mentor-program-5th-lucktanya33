@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Todo</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <form class="main debug">
+      <h2>Get Things Done</h2>
+      <h4>feel burn out!? Get the shits done and get your high-speed brain and clear mind!</h4>
+      <div class="create debug">
+        <input type="text" class="addstuff" name="addstuff" placeholder="Now! get your shits done!">
+        <input type="submit" value="create" class="btn" id="btn__create">
+      </div>
+      <div class="list debug">
+        <div class="stuff">
+          <div class="chk__area">
+            <input type="checkbox" class="check__block">
+            <label for="stuff__1"> 買三號電池兩顆</label>
+          </div>
+          <button class="btn__delete">X</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      // 功能1 新增todo項目
+      const mainArea = document.querySelector(".main")// 幫作用區域main宣告變數
+      mainArea.addEventListener('submit',function(e){
+        const addstuff = document.querySelector("input[name=addstuff]")// 宣告一個輸入的變數
+        if(addstuff.value !== "") {// addstuff.value是輸入的值，如果不為空就執行以下
+          const list = document.querySelector('.list')// 幫作用區域宣告變數
+          const newstuff = document.createElement('div')// 幫要新增的元素宣告變數
+          list.appendChild(newstuff)
+          //newstuff.innerText = addstuff.value// 寫上這個div裡面的內容
+          newstuff.outerHTML = `<div class="stuff">
+          <div class="chk__area">
+            <input type="checkbox" class="check__block">
+            <label for="stuff__1">${addstuff.value}</label>
+          </div>
+          <button class="btn__delete">X</button>
+        </div>`
+          e.preventDefault()
+        }
+        else{
+          alert('Type somthing down!')
+        }
+      })
+
+      // 功能2+3 刪除項目(事件代理的方式) + 標記刪除線
+      document.querySelector('.list').addEventListener('click', (e) => {//在.list這個區塊下面一旦有click事件執行以下函示
+        //console.log(e) e印出來好像是螢幕的位置
+        console.log(e.target)
+        const target = e.target//?問題? target沒宣告就可用不知是否為內建的屬性
+        //功能--刪除
+        if (target.classList.contains('btn__delete')) {
+          target.parentNode.remove()
+          return
+        }
+        //功能--標記
+        if (target.classList.contains('check__block')) {
+          //console.log(target.checked) .checked是一個屬性 可印出看是否有被勾選
+          if (target.checked) {
+            target.parentNode.style["text-decoration"] = "line-through";//style內容新增刪除線
+          }
+        }
+      })
+    </script>
+  </body>
