@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hw2-新拖延運動</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+  <form class="main debug">
+    <div class="form debug">
+      <div class="form__top"></div>
+      <div class="form__title debug">
+        <div class="title__name debug">
+          新拖延運動報名表單
+        </div>
+        <div class="title__activityInfo debug">
+          <div class="activityInfo date">
+            活動日期：2020/12/10 ~ 2020/12/11
+          </div>
+          <div class="activityInfo loca">
+            活動地點：台北市大安區新生南路二段1號
+          </div>
+        </div>
+        <div class="title__must debug">
+          必填 *
+        </div>
+      </div>
+      <div class="form__basicInfo debug">
+         <div class="nickname debug">
+          <div class="nickname__title debug">
+            暱稱<span>&nbsp;*</span>
+          </div>
+          <input placeholder="你的回答" class="input" name="nickname">
+        </div>
+         <div class="email debug">
+          <div class="email__title debug">
+            電子郵件<span>&nbsp;*</span>
+          </div>
+          <input placeholder="你的回答" class="input" name="email">
+         </div>
+         <div class="phone debug">
+          <div class="phone__title debug">
+            手機號碼<span>&nbsp;*</span>
+          </div>
+          <input placeholder="你的回答" class="input" name="phone">
+         </div>
+      </div>
+      <div class="form__chooseType debug">
+        <div class="chooseType__title debug">
+          報名類型<span>&nbsp;*</span>
+        </div>
+        <div class="chooseType__option"> <!--checkbox 的寫法是在MDN上面複製過來的還不熟悉-->
+          <input type="radio" id="opt1" class="opt" value="laying" name="chooseT"><!--這邊不知道為什麼CSS想用.opt選出 class改變裡面字體顏色沒辦法-->
+          <label for="opt1"> 躺在床上用想像力實作</label><br> 
+          <input type="radio" id="opt2" class="opt" value="scrolling" name="chooseT">
+          <label for="opt2"> 趴在地上滑手機找現成的</label><br> 
+        </div>
+      </div>
+      <div class="form__otherInfo debug">
+        <div class="howto debug">
+          <div class="howto__title debug">
+            怎麼知道這個活動的？<span>&nbsp;*</span>
+          </div>
+          <input placeholder="你的回答" class="input" name="howto">
+        </div>
+        <div class="others debug">
+          <div class="others__title debug">其他</div>
+          <input placeholder="你的回答" class="input">
+        </div>
+      </div>
+      <div class="form__submit debug">
+        <div class="submit__button debug">
+          <input type="submit" value="提交" id="btn">
+        </div>
+        <div class="submit__reminder debug">請勿透過表單送出您的密碼。</div>
+      </div>
+    </div>
+  </form>
+  <script>
+    const element = document.querySelector('.main')
+    element.addEventListener('submit', function(e){// 如果按下送出的動作發生就執行此function
+    
+    //提示--姓名未填
+    const inputName = document.querySelector('input[name=nickname]')    
+      if(inputName.value == '') {// inputName.value可以取到在網頁上輸入的值
+        const nn = document.querySelector('.nickname')// 宣告一個變數是nickname這個class的區塊
+        const hint = document.createElement('div')//幫要新增的div元素宣告變數名稱為hint
+        hint.innerText = "這裡沒有填寫內容！"// 寫上這個div裡面的內容
+        nn.appendChild(hint)
+        hint.classList.add("hint")
+        e.preventDefault()
+      }
+    
+    //提示--email未填
+    const inputEmail = document.querySelector('input[name=email]')
+      if(inputEmail.value == '') {
+        const ee = document.querySelector('.email')
+        const hint = document.createElement('div')// 重複區塊
+        hint.innerText = "這裡沒有填寫內容！"// 重複區塊
+        ee.appendChild(hint)
+        hint.classList.add("hint")
+        e.preventDefault()
+      }
+
+    //提示--電話未填
+    const inputPhone = document.querySelector('input[name=phone]')
+    if(inputPhone.value == '') {
+      const ee = document.querySelector('.phone')
+      const hint = document.createElement('div')// 重複區塊
+      hint.innerText = "這裡沒有填寫內容！"// 重複區塊
+      ee.appendChild(hint)
+      hint.classList.add("hint")
+      e.preventDefault()
+    }
+
+    //提示--如何得知未填
+    const inputHowto = document.querySelector('input[name=howto]')
+    if(inputHowto.value == '') {
+      const ee = document.querySelector('.howto')
+      const hint = document.createElement('div')// 重複區塊
+      hint.innerText = "這裡沒有填寫內容！"// 重複區塊
+      ee.appendChild(hint)
+      hint.classList.add("hint")
+      e.preventDefault()
+    }
+
+    //提示--報名類型未點選
+    const opt1 = document.querySelector('#opt1')//選取radio的輸入元素
+    const opt2 = document.querySelector('#opt2')
+    //console.log(opt1.checked) 印出來是true就代表這個有勾選
+    let isChooseType = (opt1.checked == false && opt2.checked == false)//兩個都沒勾選的布林值
+    if (isChooseType) { 
+      const chooseType__option = document.querySelector('.chooseType__option')
+      const hint = document.createElement('div')// 重複區塊
+      hint.innerText = "尚未勾選類型！"// 重複區塊
+      chooseType__option.appendChild(hint)
+      hint.classList.add("hint")
+      e.preventDefault()
+    }
+      //報名成功--alert 
+      let isFinished = (inputEmail.value !== '' &&  inputName.value !== '' &&  inputPhone.value !== '' &&  inputHowto.value !== '' && !isChooseType)
+      //確認全部都有填寫(皆不為空)若為true才才顯示成功報名訊息
+      if(isFinished) {
+      let finishedHint = `
+      ${inputName.value}你好，你已經報名成功囉！這是剛剛輸入的資訊
+      Emial：${inputEmail.value}
+      電話：${inputPhone.value}
+      報名類型：${document.querySelector('input[name=chooseT]').value}
+      透過${inputHowto.value}得知我們的活動
+      有任何錯誤可以來信 mtr05-procrastinate.gmail.com
+      `
+      alert(finishedHint)
+      }
+    })
+  </script>
+  <div class="footer">
+    © 2020 © Copyright. All rights Reserved.
+  </div>
+  </body>
+</html>

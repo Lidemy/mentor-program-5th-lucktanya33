@@ -1,0 +1,160 @@
+/*.debug *, .debug {
+  outline: 1px solid black;
+}*/
+
+.nav{
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#nav__name{
+  font-size: 36px;
+  color: green;
+}
+
+.nav button{
+  margin: 5px;
+  padding: 10px;
+  background-color: white;
+  font-size: 18px;
+  border: none;
+  transition: all 0.2s/*漸變效果說明:全的hover後特性都會作用 0.2秒作用時間*/
+}
+
+.nav button:hover{/*當游標移過去時特性會根據以下改變*/
+  background-color: #a3dea2;
+  color: white;
+}
+
+h2{
+  text-align: center;
+}
+
+.faq {
+  padding: 60px 120px 80px 100px;
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  background-color: var(--white);
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.q__block{
+  height: 30px;
+  margin: 30px;
+  padding: 5px;
+  text-align: left;
+  border-bottom: solid 2px #70b282;
+  font-size: 24px;
+} 
+
+.block__hide {
+  overflow: hidden;
+}
+
+.question{
+  margin: 5px;
+}
+
+.answer{
+  margin: 5px;
+}
+
+.qtitle {
+  color: #70b282;
+}
+.footer{
+  padding: 0px 0px 0px 0px;
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  background-color: var(--white);
+  box-sizing: border-box;
+}
+
+.footer__grey{
+  padding: 10px 80px 10px 80px;
+  background-color: #e8efee;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__green{
+  padding: 10px 0px 5px 0px;
+  background-color: #35564b;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__info{
+  width: 300px;
+  height: 150px;
+  margin: 20px 30px 5px 10px;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 14pxs;
+}
+
+.footer__logo{
+  padding: 5px 5px;
+  font-size: 36px;
+  color: green;
+}
+
+.footer__socialmedia{
+  padding: 10px 10px;
+  font-size: 16px;
+  color: #484848;
+}
+
+.info{
+  font-size: 14px;
+  padding: 5px;
+  color:#484848
+}
+
+@media screen and (max-width: 768px){
+  .nav {
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .q__block{
+    height: 30px;
+    margin: 50px;
+    padding: 5px;
+    text-align: left;
+    border-bottom: solid 2px #70b282;
+    font-size: 24px;
+  } 
+
+  .menu{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comment{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comment__words{
+    margin:40px;
+  }
+
+  .footer__grey {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
