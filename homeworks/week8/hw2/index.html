@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitch</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+  <div class="tops debug">
+    <h2>Twitch Top Games</h2>
+    <ul class="ul">
+      <li></li>
+    </ul>
+  </div>
+  <div class="streams debug">
+    <h1>Twitch全網直播 Top20</h1>
+    <div class="main debug">
+    </div>
+    <!--div class="block debug">
+      <div class="profile__banner debug">
+        <a href="https://example.com/" class="profile__banner debug" target="_blank">
+          <img src="https://source.unsplash.com/WLUHO9A_xik/600x400">
+        </a>
+      </div>
+      <div class="bottom debug">
+        <div class="logo debug">
+        </div>
+        <div class="info debug">
+          <div class="descrp debug"></div>
+          <div class="name debug"></div>
+        </div>
+      </div>
+    </div-->
+  </div>
+
+  <script>
+    //功能1--前五的遊戲放在nav
+    const gameData = new XMLHttpRequest()
+    gameData.open('GET', 'https://api.twitch.tv/kraken/games/top?limit=5', true);//跟API拿資料
+    gameData.setRequestHeader('Client-ID', '1dfq1cbiejk4ybvv0ndigfphk1voz3')//帳號專屬的Client-ID類似臉書token
+    gameData.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')//官方文件規定要帶的
+    gameData.onload = function() {//API的資料onload到streamsData時就會觸發這個function
+      if (gameData.status >= 200 && gameData.status <400) {// 200<=狀態碼<=400代表是成功的
+        const jsonData = gameData.responseText
+        const gameInfo = JSON.parse(jsonData)// 把JSON轉物件
+        //console.log(gameInfo)//在瀏覽器的 console 印出整包gameInfo的物件觀察資料結構
+        for (let i = 0; i <5 ; i++) { //問題：這邊不知為何設i<gameInfo會爆掉
+          console.log(gameInfo.top[i].game.name)
+
+          let ul = document.querySelector('.ul')
+          let  li = document.createElement('li')
+          ul.appendChild(li)
+          li.outerHTML = `<li>${gameInfo.top[i].game.name}</li>`
+        }
+      }
+      else{
+        console.log('err')
+      }
+    }
+    gameData.onerror = function() {
+      console.log('error')
+    }
+    gameData.send()
+    
+    //功能--2 顯示全部遊戲前20名直播畫面
+    const streamsData = new XMLHttpRequest()//XMLHttpRequest是瀏覽器提供的一個class
+    streamsData.open('GET', 'https://api.twitch.tv/kraken/streams/?games', true);//跟API拿資料
+    streamsData.setRequestHeader('Client-ID', '1dfq1cbiejk4ybvv0ndigfphk1voz3')//帳號專屬的Client-ID類似臉書token
+    streamsData.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')//官方文件規定要帶的
+    streamsData.onload = function() {//API的資料onload到streamsData時就會觸發這個function
+      if (streamsData.status >= 200 && streamsData.status <400) {// 200<=狀態碼<=400代表是成功的
+        const jsonData = streamsData.responseText
+        const twitchData = JSON.parse(jsonData)// 把JSON轉物件
+        console.log(twitchData)//在瀏覽器的 console streamsData的值
+        
+        for(let i = 0; i < 19; i++) {
+          console.log(twitchData.streams[i].game)
+          let bannerData = twitchData.streams[i].channel.profile_banner
+          let logoData = twitchData.streams[i].channel.logo
+          let descrpData = twitchData.streams[i].channel.status
+          let nameData = twitchData.streams[i].channel.name
+          let urlData = twitchData.streams[i].channel.url//拿到直播連結網址
+          
+          let main = document.querySelector('.main')//宣告要改動的地方
+          let  div = document.createElement('div')//div變數是用dom新增的
+          main.appendChild(div)//在main這個區塊中新增一個div
+          div.outerHTML = `<div class="block debug">
+          <div class="profile__banner debug">
+            <a href="${urlData}" class="profile__banner debug" target="_blank">
+              <img src="${bannerData}" alt="Well...shit happens.">
+            </a>
+          </div>
+          <div class="bottom debug">
+            <div class="logo debug">
+              <img src ="${logoData}" alt="Well...shit happens.">
+            </div>
+            <div class="info debug">
+              <div class="descrp debug">
+              ${descrpData}
+              </div>
+              <div class="name debug">
+              ${nameData}
+              </div>
+            </div>
+          </div>
+        </div>`
+        }
+      }
+      else {// 狀態錯誤處理
+        console.log('err')
+      }
+    }
+    streamsData.onerror = function() {// 錯誤處理
+      console.log('error')
+    }
+    streamsData.send()
+
+    //功能3 點擊某一個nav h1就換成遊戲名稱，下面換遊戲內容
+    const ul = document.querySelector('.ul')
+    ul.addEventListener('click', function(e){
+      if(e.target.tagName.toLowerCase() === 'li') {
+        const gameName = e.target.innerText;
+        document.querySelector('h1').innerText = gameName
+        document.querySelector('.main').innerHTML = ''//清空main裡面的內容
+        const streamsData = new XMLHttpRequest()//XMLHttpRequest是瀏覽器提供的一個class
+          streamsData.open('GET', 'https://api.twitch.tv/kraken/streams/?game=' + encodeURIComponent(gameName), true);//跟API拿資料
+          //此API規定設定Header才拿得到資料
+          streamsData.setRequestHeader('Client-ID', '1dfq1cbiejk4ybvv0ndigfphk1voz3')//帳號專屬的Client-ID類似臉書token
+          streamsData.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')//官方文件規定要帶的
+          streamsData.onload = function() {//API的資料onload到streamsData時就會觸發這個function
+            if (streamsData.status >= 200 && streamsData.status <400) {// 200<=狀態碼<=400代表是成功的
+              const jsonData = streamsData.responseText
+              const twitchData = JSON.parse(jsonData)// 把JSON轉物件
+              console.log(twitchData)//在瀏覽器的 console streamsData的值
+              
+              for(let i = 0; i < 19; i++) {
+                console.log(twitchData.streams[i].game)
+                let bannerData = twitchData.streams[i].channel.profile_banner
+                let logoData = twitchData.streams[i].channel.logo
+                let descrpData = twitchData.streams[i].channel.status
+                let nameData = twitchData.streams[i].channel.name
+                let urlData = twitchData.streams[i].channel.url//拿到直播連結網址
+                
+                let main = document.querySelector('.main')//宣告要改動的地方
+                let  div = document.createElement('div')//div變數是用dom新增的
+                main.appendChild(div)//在main這個區塊中新增一個div
+                div.outerHTML = `<div class="block debug">
+                <div class="profile__banner debug">
+                  <a href="${urlData}" class="profile__banner debug" target="_blank">
+                    <img src="${bannerData}" alt="哇勒圖片怪怪的">
+                  </a>
+                </div>
+                <div class="bottom debug">
+                  <div class="logo debug">
+                    <img src ="${logoData}" alt="哇勒圖片怪怪的">
+                  </div>
+                  <div class="info debug">
+                    <div class="descrp debug">
+                    ${descrpData}
+                    </div>
+                    <div class="name debug">
+                    ${nameData}
+                    </div>
+                  </div>
+                </div>
+              </div>`
+              }
+            }
+            else {// 狀態錯誤處理
+              console.log('err')
+            }
+          }
+          streamsData.onerror = function() {// 錯誤處理
+            console.log('error')
+          }
+          streamsData.send()
+      }
+    })
+  </script>
+
+  </body>
+</html>

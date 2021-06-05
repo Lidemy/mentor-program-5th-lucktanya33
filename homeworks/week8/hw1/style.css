@@ -1,0 +1,391 @@
+/*.debug *, .debug {
+  outline: 1px solid black;
+}*/
+
+body{
+  margin:0px
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2{
+  text-align: center;
+}
+
+.littleblock{
+  width: 15px;
+  height: 40px;
+  margin-right: 15px;
+  background-color: #a3dea2;
+}
+
+.nav{
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#nav__name{
+  font-size: 36px;
+  color: green;
+}
+
+.nav button{
+  margin: 5px;
+  padding: 10px;
+  background-color: white;
+  font-size: 18px;
+  border: none;
+  transition: all 0.2s/*漸變效果說明:全的hover後特性都會作用 0.2秒作用時間*/
+}
+
+.nav button:hover{/*當游標移過去時特性會根據以下改變*/
+  background-color: #a3dea2;
+  color: white;
+}
+
+.wrapper{
+  height: 500px;
+  background-color: #f9f9b5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("./draw__bg.jpg");
+  background-size: 100%;/*設定background圖片的比例*/
+  font-size: 25px;
+  color: white;
+}
+
+.wrapper__none{ /*如果抽到銘謝惠顧就換成這個設定*/
+  background: black;
+  color: white;
+  font-size: 25px;
+}
+
+.wrapper__first{ /*如果抽到銘謝惠顧就換成這個設定*/
+  background-image: url("./prize__1.jpeg");
+}
+
+.wrapper__second{ /*如果抽到銘謝惠顧就換成這個設定*/
+  background-image: url("./prize__2.jpeg");
+}
+
+.wrapper__third{ /*如果抽到銘謝惠顧就換成這個設定*/
+  background-image: url("./prize__3.jpeg");
+}
+
+.draw{
+  width: 380px;
+  height: 420px;
+  margin: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.draw__result{/*按下抽獎按鈕後才會出現的class*/
+  text-align: center;
+  line-height: 400px;
+  height: 60%;
+}
+
+#btn__draw__again{/*按下抽獎後才出現的新按鈕*/
+  width: 250px;
+  height: 50px;
+  background-color:darkorchid;
+  color: #e8efee;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.title{
+ height: 20%;
+ color: lightskyblue;
+}
+
+.info{
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.date{
+  height: 20%;
+  margin: 5px;
+  padding: 3px;
+  display: flex;
+  border-bottom: lightsteelblue 1px solid;
+}
+
+.instruct{
+  height: 30%;
+  margin: 5px;
+  padding: 3px;
+  display: flex;
+  border-bottom: lightsteelblue 1px solid;
+}
+
+.prize{
+  height: 50%;
+  margin: 5px;
+  padding: 3px;
+  display: flex;
+  border-bottom: lightsteelblue 1px solid;
+}
+
+.left__area{
+  height: 100%;
+  width: 25%;
+  font-weight: bold;
+  font-size:16px;
+}
+
+.right__area{
+  height: 100%;
+  width: 75%;
+}
+
+.btn__area{
+  height: 20%;
+  text-align: center;
+}
+
+.btn{
+  width: 250px;
+  height: 50px;
+  background-color: red;
+  color: #e8efee;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.intro {
+  padding: 20px 40px 20px 40px;
+  background-color: var(--white);
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.intro p{
+  font-size: 16px;
+}
+
+.pic img { /*選取pic這個class 裡面的img標籤*/
+  width: 100%;/*100% 代表父層多大他就顯示父層的100％ 這樣圖片就會隨縮放調整大小*/
+}
+
+.button{
+  display: flex;
+  justify-content:center;
+}
+
+.button :nth-child(2){/*選取第二個按鈕來改變顏色*/
+  background-color: #f9f9b5;
+}
+
+.button button{/*選取button這個class裡面的button標籤*/
+  margin: 30px;
+  width: 300px;
+  height: 160px;
+  background-color:#a8e8e1;
+  font-size: 36px;
+  color: #3e613d;
+  border: none
+}
+
+.button button:hover{/*當游標移過去時會變成wheat顏色*/
+  background-color: wheat;
+}
+
+.menu{
+  display: flex;
+}
+
+.comment{
+  margin-top: 90px;
+  margin-bottom: 0px;
+  display: flex;
+}
+
+.comment__content{
+  width: 450px;
+  height: 150px;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid #bac3c5;
+  position: relative;
+
+}
+
+.author{
+  width: 130px;
+  height: 130px;
+  text-align: center;
+  position: absolute;
+  top: -50px;
+  left: 35%;
+}
+
+.author__name{
+  font-size: 14px;
+}
+
+.descrp{
+  width: 100%;
+  height: 50%;
+  margin-top: 80px;
+  font-size: 16px;
+}
+
+.footer{
+  padding: 0px 0px 0px 0px;
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  background-color: var(--white);
+  box-sizing: border-box;
+}
+
+.footer__grey{
+  padding: 10px 80px 10px 80px;
+  background-color: #e8efee;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.footer__green{
+  padding: 10px 0px 5px 0px;
+  background-color: #35564b;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.footer__info{
+  width: 300px;
+  height: 150px;
+  margin: 20px 30px 5px 10px;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 14pxs;
+}
+
+.footer__right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer__info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer__logo{
+  font-size: 36px;
+  color: green;
+}
+
+.footer__socialmedia{
+  font-size: 14px;
+  color: #484848;
+}
+
+.info{
+  font-size: 14px;
+  padding: 5px;
+  color:#484848
+}
+
+@media screen and (max-width: 768px){
+  .nav {
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #nav__name{
+    margin:10px;
+  }
+
+  .nav__button{
+    margin:10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav button{
+    width: 20%;
+    height: 50px;
+    margin: 2px;
+    background-color: white;
+  }
+
+  .button {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comment{
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .comment__content{
+    width: 450px;
+    height: 150px;
+    margin: 40px;
+    padding: 5px;
+    border: 2px solid #bac3c5;
+    position: relative;
+  
+  }
+
+  .footer__grey {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .footer__right{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .footer__info{
+    margin: 20px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .footer__green{
+      font-size: 16px;
+      padding: 30px;
+  }
+}
