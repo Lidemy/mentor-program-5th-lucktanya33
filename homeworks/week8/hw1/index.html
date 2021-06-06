@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrizeDrawing</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+  <div class="nav debug"> 
+      <div id="nav__name">
+        Just A Bite!
+      </div>
+      <div class="nav__button">
+        <button>抽個大獎</button>
+        <button>我要點餐</button>
+        <button>查詢訂單</button>
+        <button>常見問題</button>
+      </div> 
+  </div>
+  <div class="wrapper debug">
+    <div class="draw">
+      <div class="title">
+        2021 輕盈特賞抽獎辦法
+      </div>
+      <div class="info">
+        <div class="date">
+          <div class="left__area">
+            活動期間：
+          </div>
+          <div class="right__area">
+            2020/06/01~2020/07/01
+          </div>
+        </div>
+        <div class="instruct">
+          <div class="left__area">
+            活動說明：
+          </div>
+          <div class="right__area">
+            今天老闆佛心來著決定給大家發獎勵，有看有機會，沒看只能幫QQ！只要在店內消費滿1000000元即有機會獲得 - 頭獎日本東京來回雙人遊！
+          </div>
+        </div>
+        <div class="prize">
+          <div class="left__area">
+            獎品：
+          </div>
+          <div class="right__area">
+            ❤ 頭獎一名：日本東京來回雙人遊(市價14990元)
+            ❤ 貳獎三名：90 吋電視一台(市價5990元)
+            ❤ 參獎十名：知名 YouTuber 簽名握手會入場券一張(市價1500元)
+          </div>
+        </div>
+      </div>
+      <div class="btn__area">
+        <input type="submit" value="我要抽獎" class="btn" id="btn__draw">
+      </div>
+    </div>
+    
+  </div>
+  <div class="footer debug">
+    <div class="footer__grey">
+      <div class="footer__info">
+        <div class="info 1">
+        餐館地址: 天上地下天堂路三分之一里六段520號
+        </div>
+        <div class="info 2">
+        訂位專線：02-1314-5566
+        </div>
+        <div class="info 3">
+        營業時間：週一〜週五 09:00~18:00 / 週六、週日、國定假日（含連假）休息
+        </div>
+        <div class="info 4">
+        email：service@justabite.com.tw
+        </div>
+        </div>
+      <div class="footer__right">
+        <div class="footer__logo">
+        Just A Bite! 
+        </div>
+        <div class="footer__socialmedia">
+        Facebook/Instagram/Youtube
+        </div>
+      </div>
+    </div>
+    <div class="footer__green">
+      Copyright © 2020 Just A Bite All Rights Reserved. 咬一口股份有限公司版權所有
+    </div>
+  </div>
+  <script>
+    document.querySelector('.btn').addEventListener(
+      'click', (e) => {
+      const getData = new XMLHttpRequest()// XMLHttpRequest是瀏覽器提供的一個class
+      getData.onload = function() {//當getData onload到資料時就會觸發這個function
+        if (getData.status >= 200 && getData.status <400) {// 200<=狀態碼<=400代表是成功的
+          //console.log(getData.responseText)// 印出我們所拿到的資料
+          const jsonData = getData.responseText
+          const prizeResult = JSON.parse(jsonData)// 把JSON轉物件
+          console.log(prizeResult)//在瀏覽器的 console 印出值
+          console.log(prizeResult.prize)// 物件取值，取出prize的值並在瀏覽器印出
+          
+          // 以下為抽到獎項之後要頁面要做的事情
+          const wrapper = document.querySelector('.wrapper')
+          const div = document.createElement('div')
+          div.classList.add("draw__result")//新增一個class為"draw__result"的區塊
+          wrapper.appendChild(div)
+          
+          if (prizeResult.prize == "NONE") {
+            wrapper.removeChild(document.querySelector(".draw"))// 抽獎區塊刪除
+            wrapper.classList.add('wrapper__none')/*如果抽到銘謝惠顧就換成這個CSS設定*/
+            const draw__result = document.querySelector(".draw__result")
+            draw__result.innerText = "銘謝惠顧" 
+            //新增再次抽獎按鈕，利用不同id設定另一個CSS樣式
+            const div = document.createElement('div')
+            wrapper.appendChild(div)
+            div.outerHTML = `<div class="btn__area">
+              <input type="submit" value="再抽一次" class="btn" onclick="javascript:window.location.reload()" id="btn__draw__again">
+            </div>`
+          }
+          
+          if (prizeResult.prize == "FIRST") {
+            wrapper.style.backgroundImage="url(./prize__1.jpeg)";
+            wrapper.removeChild(document.querySelector(".draw"))
+            const draw__result = document.querySelector(".draw__result")
+            draw__result.innerText = "恭喜你中頭獎了！日本東京來回雙人遊！"
+          }
+          if (prizeResult.prize == "SECOND") {
+            wrapper.style.backgroundImage="url(./prize__2.jpeg)";
+            wrapper.removeChild(document.querySelector(".draw"))
+            const draw__result = document.querySelector(".draw__result")
+            draw__result.innerText = "二獎！90吋電視一台！"
+          }
+
+          if (prizeResult.prize == "THIRD") {
+            wrapper.style.backgroundImage="url(./prize__3.jpeg)";
+            wrapper.removeChild(document.querySelector(".draw"))
+            const draw__result = document.querySelector(".draw__result")
+            draw__result.innerText = "恭喜你抽中三獎：知名YouTuber簽名握手會入場券一張，bang！"
+          }
+        }
+        else {// 狀態錯誤處理
+          console.log('err')
+        }
+      }
+      getData.onerror = function() {// 錯誤處理
+        console.log('error')
+      }
+      getData.open('GET', 'https://dvwhnbka7d.execute-api.us-east-1.amazonaws.com/default/lottery', true)//第三個參數true就是 “你要非同步嗎？”
+      getData.send()
+      
+    })
+  </script>
+  </body>
+</html>

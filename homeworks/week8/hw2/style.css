@@ -1,0 +1,186 @@
+/*.debug *, .debug {
+  outline: 1px solid black;
+}*/
+
+body{
+  margin: 0px;
+}
+
+h1{
+  margin: 0px;
+  padding-top: 15px;
+}
+
+.tops{
+  height: 80px;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aliceblue;
+  box-sizing: border-box;
+}
+
+.ul{
+  display: flex;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.ul li{
+  margin: 15px;
+  cursor: pointer;
+  list-style:none;
+}
+
+.streams{
+  background-color: darkgray;
+  text-align: center;
+}
+
+.main{
+  padding: 10px 50px 10px 50px;
+  display: flex;
+  flex-wrap: wrap;/*flex排列換行*/
+  justify-content: center;
+}
+
+.block {
+  width: 350px;
+  height: 250px;
+  margin: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.profile__banner{
+  padding: 2px;
+  width: 100%;
+  height: 70%;
+  box-sizing: border-box;
+}
+
+.profile__banner img{ /*用100%讓圖片隨著div容器大小變大變小*/
+  width: 100%;
+  height: 100%;
+}
+
+.bottom{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  background-color: darkslateblue;
+  box-sizing: border-box;
+}
+
+.info{
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.logo{
+  padding: 5px;
+  width: 90px;
+  height: 90px;
+  box-sizing: border-box;
+}
+
+.logo img{
+  width: 100%;
+}
+
+.descrp{
+  height: 70%;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.name{
+  height: 30%;
+  padding: 5px;
+  color: aliceblue;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: left;  
+  line-height: 50%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 900px){
+  .main{
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tops{
+    height: 250px;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aliceblue;
+    box-sizing: border-box;
+  }
+
+  .ul{
+    padding: 5px;
+    display: flex;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px){
+
+  h1{
+    font-size: 28px;
+  }
+
+  .main{
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tops{
+    height: 250px;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aliceblue;
+    box-sizing: border-box;
+  }
+
+  .ul{
+    padding: 5px;
+    display: flex;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+
+  .ul li{
+    margin: 5px;
+    cursor: pointer;
+    list-style:none;
+  }
+
+  .block {
+    width: 300px;
+    height: 250px;
+    margin: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
