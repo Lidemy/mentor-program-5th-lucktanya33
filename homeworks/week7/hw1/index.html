@@ -31,18 +31,27 @@
             暱稱<span>&nbsp;*</span>
           </div>
           <input placeholder="你的回答" class="input" name="nickname">
+          <div class="hint_hide" id="hint_nickname">
+            請輸入資料
+          </div>
         </div>
          <div class="email debug">
           <div class="email__title debug">
             電子郵件<span>&nbsp;*</span>
           </div>
           <input placeholder="你的回答" class="input" name="email">
+          <div class="hint_hide" id="hint_email">
+            請輸入資料
+          </div>
          </div>
          <div class="phone debug">
           <div class="phone__title debug">
             手機號碼<span>&nbsp;*</span>
           </div>
           <input placeholder="你的回答" class="input" name="phone">
+          <div class="hint_hide" id="hint_phone">
+            請輸入資料
+          </div>
          </div>
       </div>
       <div class="form__chooseType debug">
@@ -55,6 +64,9 @@
           <input type="radio" id="opt2" class="opt" value="scrolling" name="chooseT">
           <label for="opt2"> 趴在地上滑手機找現成的</label><br> 
         </div>
+        <div class="hint_hide" id="hint_type">
+          請輸入資料
+        </div>
       </div>
       <div class="form__otherInfo debug">
         <div class="howto debug">
@@ -62,6 +74,9 @@
             怎麼知道這個活動的？<span>&nbsp;*</span>
           </div>
           <input placeholder="你的回答" class="input" name="howto">
+          <div class="hint_hide" id="hint_howto">
+            請輸入資料
+          </div>
         </div>
         <div class="others debug">
           <div class="others__title debug">其他</div>
@@ -79,49 +94,41 @@
   <script>
     const element = document.querySelector('.main')
     element.addEventListener('submit', function(e){// 如果按下送出的動作發生就執行此function
-    
-    //提示--姓名未填
+
+    //提示--name未填
     const inputName = document.querySelector('input[name=nickname]')    
-      if(inputName.value == '') {// inputName.value可以取到在網頁上輸入的值
-        const nn = document.querySelector('.nickname')// 宣告一個變數是nickname這個class的區塊
-        const hint = document.createElement('div')//幫要新增的div元素宣告變數名稱為hint
-        hint.innerText = "這裡沒有填寫內容！"// 寫上這個div裡面的內容
-        nn.appendChild(hint)
-        hint.classList.add("hint")
-        e.preventDefault()
-      }
+    if(inputName.value == '') {
+      const hintarea = document.querySelector('#hint_nickname')
+      hintarea.classList.remove('hint_hide')
+      hintarea.classList.add('hint')
+      e.preventDefault()
+    }
     
     //提示--email未填
     const inputEmail = document.querySelector('input[name=email]')
       if(inputEmail.value == '') {
-        const ee = document.querySelector('.email')
-        const hint = document.createElement('div')// 重複區塊
-        hint.innerText = "這裡沒有填寫內容！"// 重複區塊
-        ee.appendChild(hint)
-        hint.classList.add("hint")
+        const hintarea = document.querySelector('#hint_email')
+        hintarea.classList.remove('hint_hide')
+        hintarea.classList.add('hint')
         e.preventDefault()
       }
 
     //提示--電話未填
     const inputPhone = document.querySelector('input[name=phone]')
     if(inputPhone.value == '') {
-      const ee = document.querySelector('.phone')
-      const hint = document.createElement('div')// 重複區塊
-      hint.innerText = "這裡沒有填寫內容！"// 重複區塊
-      ee.appendChild(hint)
-      hint.classList.add("hint")
-      e.preventDefault()
+      const hintarea = document.querySelector('#hint_phone')
+        hintarea.classList.remove('hint_hide')
+        hintarea.classList.add('hint')
+        e.preventDefault()
     }
 
     //提示--如何得知未填
     const inputHowto = document.querySelector('input[name=howto]')
     if(inputHowto.value == '') {
-      const ee = document.querySelector('.howto')
-      const hint = document.createElement('div')// 重複區塊
-      hint.innerText = "這裡沒有填寫內容！"// 重複區塊
-      ee.appendChild(hint)
-      hint.classList.add("hint")
-      e.preventDefault()
+      const hintarea = document.querySelector('#hint_howto')
+        hintarea.classList.remove('hint_hide')
+        hintarea.classList.add('hint')
+        e.preventDefault()
     }
 
     //提示--報名類型未點選
@@ -130,12 +137,10 @@
     //console.log(opt1.checked) 印出來是true就代表這個有勾選
     let isChooseType = (opt1.checked == false && opt2.checked == false)//兩個都沒勾選的布林值
     if (isChooseType) { 
-      const chooseType__option = document.querySelector('.chooseType__option')
-      const hint = document.createElement('div')// 重複區塊
-      hint.innerText = "尚未勾選類型！"// 重複區塊
-      chooseType__option.appendChild(hint)
-      hint.classList.add("hint")
-      e.preventDefault()
+      const hintarea = document.querySelector('#hint_type')
+        hintarea.classList.remove('hint_hide')
+        hintarea.classList.add('hint')
+        e.preventDefault()
     }
       //報名成功--alert 
       let isFinished = (inputEmail.value !== '' &&  inputName.value !== '' &&  inputPhone.value !== '' &&  inputHowto.value !== '' && !isChooseType)

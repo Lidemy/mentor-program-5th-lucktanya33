@@ -59,6 +59,10 @@ h2{
   margin: 15px 0px 0px 15px;
 }
 
+.line_through{
+  text-decoration: line-through;
+}
+
 .btn__delete {
   width: 25px;
   height: 25px;

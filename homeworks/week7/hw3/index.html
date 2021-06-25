@@ -23,23 +23,26 @@
       </div>
     </form>
     <script>
-      // 功能1 新增todo項目
       const mainArea = document.querySelector(".main")// 幫作用區域main宣告變數
+      
+      // 功能1 新增todo項目
       mainArea.addEventListener('submit',function(e){
         const addstuff = document.querySelector("input[name=addstuff]")// 宣告一個輸入的變數
-        if(addstuff.value !== "") {// addstuff.value是輸入的值，如果不為空就執行以下
+
+        if(addstuff.value !== "") {
+          // addstuff.value是輸入的值，如果不為空就執行以下
           const list = document.querySelector('.list')// 幫作用區域宣告變數
           const newstuff = document.createElement('div')// 幫要新增的元素宣告變數
           list.appendChild(newstuff)
-          //newstuff.innerText = addstuff.value// 寫上這個div裡面的內容
           newstuff.outerHTML = `<div class="stuff">
           <div class="chk__area">
             <input type="checkbox" class="check__block">
             <label for="stuff__1">${addstuff.value}</label>
           </div>
           <button class="btn__delete">X</button>
-        </div>`
-          e.preventDefault()
+          </div>`
+          e.preventDefault()//~問題~這邊一刪除就不能新增todo了，意思是這邊的default行為是不能新增嗎
+          addstuff.value = ""//UX改善:清除輸入框的值
         }
         else{
           alert('Type somthing down!')
@@ -49,19 +52,18 @@
       // 功能2+3 刪除項目(事件代理的方式) + 標記刪除線
       document.querySelector('.list').addEventListener('click', (e) => {//在.list這個區塊下面一旦有click事件執行以下函示
         //console.log(e) e印出來好像是螢幕的位置
-        console.log(e.target)
-        const target = e.target//?問題? target沒宣告就可用不知是否為內建的屬性
+        //console.log(e.target) //~問題~target沒宣告就可用不知是否為內建的屬性
+        const target = e.target
         //功能--刪除
         if (target.classList.contains('btn__delete')) {
           target.parentNode.remove()
           return
         }
         //功能--標記
+        /*程式碼敘述:如果有點到check__block這個地方包含的範圍就執行{}內statement*/
         if (target.classList.contains('check__block')) {
           //console.log(target.checked) .checked是一個屬性 可印出看是否有被勾選
-          if (target.checked) {
-            target.parentNode.style["text-decoration"] = "line-through";//style內容新增刪除線
-          }
+          target.parentNode.classList.toggle('line_through')//class一開一關
         }
       })
     </script>
