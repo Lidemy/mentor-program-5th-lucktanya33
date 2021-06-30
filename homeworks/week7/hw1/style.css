@@ -14,6 +14,10 @@ input{
 border:solid 2px lightgray
 }
 
+.hint_hide{
+visibility: hidden;
+}
+
 .hint{ /*動態新增內容*/
 padding: 5px;
 color: red;
