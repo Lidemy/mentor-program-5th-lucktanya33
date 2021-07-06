@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W12-留言板前後端串接</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+  </script>
+  <script>
+    //--函式--render留言資料
+    function appendComments (data) {
+      console.log(data)// 在console中印出方便除錯
+      for (let i = 0; i < data.comments.length; i++) {
+          const commentId = data.comments[i].id
+          const commentUsername = data.comments[i].username
+          const commentContent = data.comments[i].content
+          $('.area_comments').append(`
+          <div class="comment debug border border-danger rounded m-3">
+          <span class="comment_author p-2 debug" >ID&nbsp${commentId}</span>
+          <span class="comment_author p-2 debug" >Username&nbsp${commentUsername}</span>
+          <p class="comment_content p-2 debug">${commentContent}</p>
+        </div>
+      `)
+      }
+    }
+    $(document).ready(() =>{
+      //--顯示留言--
+      getcomments()//最一開始的那5則留言
+
+      //--載入更多--
+      $('.area_comments').on('click', '.load-more', () => {
+        getcomments()
+      })
+
+      //--新增留言--
+      $('.area_add').submit(function (e) {
+        e.preventDefault()
+        //拿到使用者輸入的值(from form)
+        let usernameValue = $('input[name=username]').val()
+        let contentValue = $('textarea[name=content]').val() 
+        //發request--->送出留言給API     
+        $.ajax({
+          method: "POST",
+          url: "https://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_add_comments.php",
+          data: {
+            username: usernameValue,
+            content:  contentValue
+          }
+        })
+          .done(function (data) {//送出POST後的處理
+            if (!data.ok) { //錯誤處理(根據api資料結構印出錯誤訊息)
+              alert(data.message)
+              return
+            } else if (data.ok) {//成功處理
+              alert('已成功新增留言')
+              setInterval('location.reload()', 300);//0.3秒後刷新頁面                 
+              console.log(data.message)
+            }
+          })
+      })
+    })
+
+    let lastID = null
+    const loadMoreButtonHTML = '<button class="load-more btn btn-secondary m-3">載入更多</button>'
+    let URL = "https://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php"
+
+    //--函式--API拿留言資料
+    function getcomments () {
+      //console.log('BeforeGET' + URL)用來知道發reauest前的URL值
+      $('.load-more').hide()
+
+      //發request<---跟API拿資料
+      $.ajax({
+      method: "GET",
+      url: URL,
+      success: data => { //while the GET request succeded you get 'json-form data' within data
+        //成功拿到資料後把資料放到前端
+        appendComments(data)
+
+        //設定lastID
+        let length = data.comments.length
+        if (length < 5) {
+          $('.load-more').hide()
+        } else{
+          lastID = data.comments[length-1].id //console.log(lastID)
+          URL = 'https://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php?before=' + lastID //console.log('AfterGET' + URL)
+          $('.area_comments').append(loadMoreButtonHTML)
+        }
+      },
+      error: function (request, status, error) {
+        console.log(request.responseText)
+        alert(request.responseText);
+        }
+      })
+    }
+  </script>
+</head>
+<style>
+  /*.debug *, .debug {
+  outline: 1px solid black;
+  }*/
+  
+  .comment{
+    background-color: pink;
+  }
+</style>
+<body>
+  <form class="area_add m-3">
+    <div class="form-group">
+      <label for="exampleInputEmail1">使用者名稱</label>
+      <input name="username"  class="form-control"  aria-describedby="emailHelp" placeholder="">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">留言內容</label>
+      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-secondary">新增留言</button>
+  </form>
+  <div class="area_comments debug">
+    <div class="comment debug border border-danger rounded m-3">
+      <span class="comment_author p-2 debug" >ID&nbsp範例</span>
+      <span class="comment_author p-2 debug" >作者</span>
+      <p class="comment_content p-2 debug">林法極平會中到：風我麼，例教務中，突此兒吃生。在構會小驗；但施子無金五總生哥接</p>
+    </div>
+  </div>
+</body>
+</html>
