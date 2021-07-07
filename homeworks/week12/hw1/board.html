@@ -42,7 +42,7 @@
         //發request--->送出留言給API     
         $.ajax({
           method: "POST",
-          url: "https://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_add_comments.php",
+          url: "http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_add_comments.php",
           data: {
             username: usernameValue,
             content:  contentValue
@@ -63,7 +63,7 @@
 
     let lastID = null
     const loadMoreButtonHTML = '<button class="load-more btn btn-secondary m-3">載入更多</button>'
-    let URL = "https://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php"
+    let URL = "http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php"
 
     //--函式--API拿留言資料
     function getcomments () {
@@ -84,7 +84,7 @@
           $('.load-more').hide()
         } else{
           lastID = data.comments[length-1].id //console.log(lastID)
-          URL = 'https://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php?before=' + lastID //console.log('AfterGET' + URL)
+          URL = 'http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php?before=' + lastID //console.log('AfterGET' + URL)
           $('.area_comments').append(loadMoreButtonHTML)
         }
       },
