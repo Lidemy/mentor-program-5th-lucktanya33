@@ -1,0 +1,144 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>W12-todolist</title>
+  <meta NAME ="viewport" content="width=device-width, initial-scale=1">
+  <!-- 引入 Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- 引入 Bootstrap Javascript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js">
+  </script>
+  <script>
+    // 第一步 加上eventlistener
+    $(document).ready(function() {
+      
+      //功能：新增
+      $('.btn-add').click(function() {
+        //拿到輸入框input的值
+        let todoValue = $('.todo-input').val() 
+        $('.todo-input').val('')//清空輸入格 設定成val('')
+        //放進下方待辦清單
+        $('.todos').append(`<div class="todo m-1">
+          <span class="todo-content">${todoValue}</span>
+          <button class ="btn-mark btn btn-outline-primary" >標記完成</button>
+          <button class ="btn-edit btn btn-outline-primary" >編輯</button>
+          <button class ="btn-del btn btn-outline-primary" >刪除</button>
+          <input class="edit-input hide" >
+          <button class ="btn-editdone hide btn btn-info" >完成</button>
+        </div>`)
+      })
+      
+      //功能：清除全部
+      $('.btn-deleteall').click(function(){
+        $('.todo').remove()
+      })
+
+      //功能：刪除 
+      $('.todos').on('click', '.btn-del', function(e) {//用事件代理的方式做 
+        $(e.target).parent().remove() 
+      })
+
+      //功能：編輯
+      //階段1 按下編輯 
+      $('.todos').on('click', '.btn-edit', function(e) {//用事件代理的方式做 
+        //拿到todo項目資料
+        let todo = $(e.target).prev().prev()
+        let todoContent = $(e.target).prev().prev().text()//選取同級元素 prev()<<-前一個
+        //顯示編輯框
+        $(e.target).next().next().removeClass('hide')
+        $(e.target).next().next().next().removeClass('hide')
+
+        //階段2 按下完成按鈕
+        $('.todo').on('click', '.btn-editdone', function(e) {
+          //拿到輸入值
+          let newContent = $(e.target).prev().val()
+          // 放上編輯後的值
+          $(e.target).parent().find('span').text(newContent)
+          // 移除編輯框
+          $(e.target).addClass('hide')
+          $(e.target).prev().addClass('hide')
+        }) 
+      })
+
+      //功能：標記完成
+      $('.todos').on('click', '.btn-mark', function(e) {//用事件代理的方式做 
+        const theTodo = $(e.target).parent();//目前點擊的那個todo
+        if (theTodo.hasClass('done')) { 
+          //判斷目前完成狀態給予標記
+          theTodo.removeClass('done') 
+          $(e.target).text('標記完成')
+        }
+        else{
+          theTodo.addClass('done') 
+          $(e.target).text('標記未完成')
+        }
+      })
+
+      //功能：篩選 
+      $('.bottom').on('click', 'button', e =>{
+        console.log($(e.target).attr('data-filter'))//拿到屬性裡面的值，知道點擊哪個按鈕
+        const filter = $(e.target).attr('data-filter')
+        // 點了未完成的，要把完成的加上class"hide"
+        if (filter === "undone") { //未完成
+          $('.todo').each((i,el) => {
+            if ($(el).hasClass('done')) {
+              $(el).addClass('hide')
+            } else{
+              $(el).removeClass('hide')}
+          })
+        }
+        else if (filter === "done") {//已完成
+          $('.todo').each((i,el) => {
+            if (!$(el).hasClass('done')) {
+              $(el).addClass('hide')
+            } else{
+              $(el).removeClass('hide')}
+          })
+        }
+        else {//全部
+          $('.todo').each((i,el) => {
+            $(el).removeClass('hide')
+          })
+        }
+      })
+    })
+  </script>
+  <style>
+    .done{
+      text-decoration: line-through;
+    }
+
+    .todo{
+      padding:10px;
+      border: 1px solid gray;
+      color:red;
+    }
+
+    .hide{
+      display: none;
+    }
+  </style>
+  <body>
+      <input class="todo-input m-3" placeholder="請輸入代辦事項">
+      <button class ="btn-add btn btn-primary m-1">add todo</button>
+      <button class ="btn-deleteall btn btn-primary m-1">clear all</button>
+    <div class="todos m-3">
+      <div class="todo m-1">
+        <span class="todo-content">原始項目1</span>
+        <button class ="btn-mark btn btn-outline-primary m-2" >標記完成</button>
+        <button class ="btn-edit btn btn-outline-primary m-2" >編輯</button>
+        <button class ="btn-del btn btn-outline-primary" >刪除</button>
+        <input class="edit-input hide" >
+        <button class ="btn-editdone hide btn btn-info" >完成</button>
+      </div>
+    </div>
+    <div class="bottom m-3">
+      <button class ="btn btn btn-dark m-2" data-filter="all">全部</button> <!--客製化屬性 data-value-->
+      <button class ="btn btn btn-dark m-2" data-filter="done">已完成</button>
+      <button class ="btn btn btn-dark m-2" data-filter="undone">未完成</button>
+    </div>
+  </body>
+</head>  
+</html>
