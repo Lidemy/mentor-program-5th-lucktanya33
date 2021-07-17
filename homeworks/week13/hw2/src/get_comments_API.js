@@ -6,7 +6,7 @@ import $ from 'jquery'// Unable to resolve path to module 'jquery'  import/no-un
 export function getCommentsAPI(apiURL, lastID, loadData) {
   let url = `${apiURL}/api_comments.php`
   if (lastID) {
-    url += `?before${lastID}`
+    url += `?before=${lastID}`
   }
   $.ajax({
     url
