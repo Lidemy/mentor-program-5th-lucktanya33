@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitch</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+  <div class="tops debug">
+    <h2>Twitch Top Games</h2>
+    <ul class="ul">
+      <li></li>
+    </ul>
+  </div>
+  <div class="streams debug">
+    <h1>Twitch全網直播 Top20</h1>
+    <div class="main debug">
+    </div>
+    <!--div class="block debug">
+      <div class="profile__banner debug">
+        <a href="https://example.com/" class="profile__banner debug" target="_blank">
+          <img src="https://source.unsplash.com/WLUHO9A_xik/600x400">
+        </a>
+      </div>
+      <div class="bottom debug">
+        <div class="logo debug">
+        </div>
+        <div class="info debug">
+          <div class="descrp debug"></div>
+          <div class="name debug"></div>
+        </div>
+      </div>
+    </div-->
+  </div>
+
+  <script>
+    //fetch 串接
+    const url = 'https://api.twitch.tv/kraken'
+    let headers = {
+        "Content-Type": "application/json",
+        'Client-ID': '1dfq1cbiejk4ybvv0ndigfphk1voz3',//twitch規定
+        "Accept": 'application/vnd.twitchtv.v5+json',//twitch規定
+    }
+    //功能--2 顯示全部遊戲前20名直播畫面
+    fetch(`${url}/streams/?games`, {
+        method: "GET",
+        headers: headers,
+    })
+    .then( (response) => response.json())
+    .then( (json) => {
+    for(let i = 0; i <= 19; i++) {
+          let bannerData = json.streams[i].channel.profile_banner
+          let logoData = json.streams[i].channel.logo
+          let descrpData = json.streams[i].channel.status
+          let nameData = json.streams[i].channel.name
+          let urlData = json.streams[i].channel.url//拿到直播連結網址
+          
+          let main = document.querySelector('.main')//宣告要改動的地方
+          let  div = document.createElement('div')//div變數是用dom新增的
+          main.appendChild(div)//在main這個區塊中新增一個div
+          div.outerHTML = `<div class="block debug">
+          <div class="profile__banner debug">
+            <a href="${urlData}" class="profile__banner debug" target="_blank">
+              <img src="${bannerData}" alt="Well...shit happens.">
+            </a>
+          </div>
+          <div class="bottom debug">
+            <div class="logo debug">
+              <img src ="${logoData}" alt="Well...shit happens.">
+            </div>
+            <div class="info debug">
+              <div class="descrp debug">
+              ${descrpData}
+              </div>
+              <div class="name debug">
+              ${nameData}
+              </div>
+            </div>
+          </div>
+        </div>`
+        }
+    });
+    
+    //功能1--前五的遊戲放在nav
+    fetch(`${url}/games/top?limit=5`, {
+    method: "GET",
+    headers: headers,
+    })
+    .then( (response) => response.json())
+    .then( (jsonTOP5) => {
+      for (let i = 0; i <5 ; i++) { 
+          let ul = document.querySelector('.ul')
+          let  li = document.createElement('li')
+          ul.appendChild(li)
+          li.outerHTML = `<li>${jsonTOP5.top[i].game.name}</li>`
+        }
+      });
+
+    //功能3 點擊某一個nav的前五名-> 1.h1就換成遊戲名稱 2.主要畫面換該遊戲前20直播畫面
+    const ul = document.querySelector('.ul')
+    ul.addEventListener('click', function(e){
+      if(e.target.tagName.toLowerCase() === 'li') {
+        const gameName = e.target.innerText;
+        const encodeGamename = encodeURIComponent(gameName)
+        document.querySelector('h1').innerText = gameName
+        document.querySelector('.main').innerHTML = ''//清空main裡面的內容
+
+        fetch(`${url}/streams/?game=${encodeGamename}`, {
+        method: "GET",
+        headers: headers,
+        })
+        .then( (response) => response.json())
+        .then( (json20streams) => {
+          console.log(json20streams)
+          for(let i = 0; i <= 19; i++) {
+                console.log(json20streams.streams[i].game)
+                let bannerData = json20streams.streams[i].channel.profile_banner
+                let logoData = json20streams.streams[i].channel.logo
+                let descrpData = json20streams.streams[i].channel.status
+                let nameData = json20streams.streams[i].channel.name
+                let urlData = json20streams.streams[i].channel.url//拿到直播連結網址
+                
+                let main = document.querySelector('.main')//宣告要改動的地方
+                let  div = document.createElement('div')//div變數是用dom新增的
+                main.appendChild(div)//在main這個區塊中新增一個div
+                div.outerHTML = `<div class="block debug">
+                <div class="profile__banner debug">
+                  <a href="${urlData}" class="profile__banner debug" target="_blank">
+                    <img src="${bannerData}" alt="哇勒圖片怪怪的">
+                  </a>
+                </div>
+                <div class="bottom debug">
+                  <div class="logo debug">
+                    <img src ="${logoData}" alt="哇勒圖片怪怪的">
+                  </div>
+                  <div class="info debug">
+                    <div class="descrp debug">
+                    ${descrpData}
+                    </div>
+                    <div class="name debug">
+                    ${nameData}
+                    </div>
+                  </div>
+                </div>
+              </div>`
+              }
+          });        
+      }
+    })
+  </script>
+  </body>
+</html>
