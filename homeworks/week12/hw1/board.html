@@ -42,19 +42,30 @@
         //發request--->送出留言給API     
         $.ajax({
           method: "POST",
-          url: "http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_add_comments.php",
+          //url: "http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_add_comments.php",
+          url: "http://192.168.64.3/week12/ver3/api_add_comments.php",
           data: {
             username: usernameValue,
             content:  contentValue
           }
         })
           .done(function (data) {//送出POST後的處理
+            console.log(data)
+            //const commentId = data.comments[0].id
             if (!data.ok) { //錯誤處理(根據api資料結構印出錯誤訊息)
               alert(data.message)
               return
             } else if (data.ok) {//成功處理
-              alert('已成功新增留言')
-              setInterval('location.reload()', 300);//0.3秒後刷新頁面                 
+              const commentId = data.comments[0].id
+              // alert('已成功新增留言')
+              // setInterval('location.reload()', 300);//0.3秒後刷新頁面
+              $('.area_comments').prepend(`
+              <div class="comment debug border border-danger rounded m-3">
+              <span class="comment_author p-2 debug" >ID&nbsp${commentId}</span>
+              <span class="comment_author p-2 debug" >Username&nbsp${usernameValue}</span>
+              <p class="comment_content p-2 debug">${contentValue}</p>
+            </div>
+            `)                  
               console.log(data.message)
             }
           })
@@ -63,7 +74,8 @@
 
     let lastID = null
     const loadMoreButtonHTML = '<button class="load-more btn btn-secondary m-3">載入更多</button>'
-    let URL = "http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php"
+    // let URL = "http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php"
+    let URL = "http://192.168.64.3/week12/ver3/api_comments.php"
 
     //--函式--API拿留言資料
     function getcomments () {
@@ -84,7 +96,8 @@
           $('.load-more').hide()
         } else{
           lastID = data.comments[length-1].id //console.log(lastID)
-          URL = 'http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php?before=' + lastID //console.log('AfterGET' + URL)
+          URL = 'http://192.168.64.3/week12/ver3/api_comments.php?before=' + lastID 
+          // URL = 'http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1/api_comments.php?before=' + lastID 
           $('.area_comments').append(loadMoreButtonHTML)
         }
       },
