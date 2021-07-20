@@ -8,6 +8,15 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js">
   </script>
   <script>
+  // --函式--跳脫字元防XSS
+  function escapeHtml(unsafe) {
+    return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+  }
     //--函式--render留言資料
     function appendComments (data) {
       console.log(data)// 在console中印出方便除錯
@@ -18,8 +27,8 @@
           $('.area_comments').append(`
           <div class="comment debug border border-danger rounded m-3">
           <span class="comment_author p-2 debug" >ID&nbsp${commentId}</span>
-          <span class="comment_author p-2 debug" >Username&nbsp${commentUsername}</span>
-          <p class="comment_content p-2 debug">${commentContent}</p>
+          <span class="comment_author p-2 debug" >Username&nbsp${escapeHtml(commentUsername)}</span>
+          <p class="comment_content p-2 debug">${escapeHtml(commentContent)}</p>
         </div>
       `)
       }
@@ -113,6 +122,12 @@
 <style>
   .comment{
     background-color: pink;
+  }
+  p {
+  word-break: break-all;
+  }
+  span {
+    word-break: break-all;
   }
 </style>
 <body>
