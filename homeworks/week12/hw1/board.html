@@ -38,7 +38,7 @@
         e.preventDefault()
         //拿到使用者輸入的值(from form)
         let usernameValue = $('input[name=username]').val()
-        let contentValue = $('textarea[name=content]').val() 
+        let contentValue = $('textarea[name=content]').val()
         //發request--->送出留言給API     
         $.ajax({
           method: "POST",
@@ -51,25 +51,26 @@
         })
           .done(function (data) {//送出POST後的處理
             console.log(data)
-            //const commentId = data.comments[0].id
             if (!data.ok) { //錯誤處理(根據api資料結構印出錯誤訊息)
               alert(data.message)
               return
             } else if (data.ok) {//成功處理
               const commentId = data.comments[0].id
-              // alert('已成功新增留言')
-              // setInterval('location.reload()', 300);//0.3秒後刷新頁面
+              alert('已成功新增留言')
               $('.area_comments').prepend(`
               <div class="comment debug border border-danger rounded m-3">
               <span class="comment_author p-2 debug" >ID&nbsp${commentId}</span>
               <span class="comment_author p-2 debug" >Username&nbsp${usernameValue}</span>
               <p class="comment_content p-2 debug">${contentValue}</p>
-            </div>
-            `)                  
+              </div>
+              `)
+              // 清空input
+              $('input[name=username]').val('')
+              $('textarea[name=content]').val('') 
               console.log(data.message)
             }
           })
-      })
+        })
     })
 
     let lastID = null
@@ -110,10 +111,6 @@
   </script>
 </head>
 <style>
-  /*.debug *, .debug {
-  outline: 1px solid black;
-  }*/
-  
   .comment{
     background-color: pink;
   }
@@ -128,7 +125,7 @@
       <label for="exampleFormControlTextarea1">留言內容</label>
       <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
     </div>
-    <button type="submit" class="btn btn-secondary">新增留言</button>
+    <button type="submit" class="btn btn-secondary" id="btn-submit">新增留言</button>
   </form>
   <div class="area_comments debug">
     <div class="comment debug border border-danger rounded m-3">
