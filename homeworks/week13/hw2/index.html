@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W13-plugin</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="dist/main.js"></script>
+  <script>
+    //DOM結構準備好->進行初始化
+      $(document).ready(() => {
+        commentPlugin.init({
+        //apiURL : "http://192.168.64.3/week12/ver2"//LOCAL端
+        apiURL:"http://mentor-program.co/mtr04group1/lucktanya33/week12/hw1",
+        containerSelector: '.comment-area'
+      })
+    })
+  </script>
+</head>
+<style>
+  /*.comment{
+    background-color: pink;
+  }*/
+</style>
+<body>
+  <div class="container">
+    <div class="comment-area"></div> <!--新增DOM的地方-->
+  </div>
+</body>
+</html>

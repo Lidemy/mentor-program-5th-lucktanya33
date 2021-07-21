@@ -1,0 +1,77 @@
+/*.debug *, .debyg{
+ outline: 1px solid black;
+}*/
+
+$primary-color:palevioletred;
+$bg-color: cornsilk;
+$btn-color: white;
+
+
+h2{
+  font-size: 50px;
+}
+
+.main{
+  width: 500px;
+  background-color: $bg-color;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.create{
+  height: 15%;
+  margin: 10px;
+  font-size: 26px;
+  border-bottom: solid 4px $primary-color;
+  box-sizing: border-box;
+}
+
+.addstuff{
+  width: 60%;
+  height: 50%;
+}
+
+#btn__create {
+  width: 60px;
+  height: 30px;
+  margin: 20px 0px 0px 15px;
+  background-color: $bg-color;
+  font-size: 16px;
+}
+
+.list{
+  height: 50%;
+  margin: 10px;
+  padding: 0px 10px 0px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 24 px;
+  box-sizing: border-box;
+}
+
+.stuff{
+  width: 90%;
+  height: 20%;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  border:dotted 2px $primary-color;
+}
+
+.chk__area{
+  margin: 15px 0px 0px 15px;
+}
+
+.line_through{
+  text-decoration: line-through;
+}
+
+.btn__delete {
+  width: 25px;
+  height: 25px;
+  padding: 1px;
+  margin: 22px;
+  background-color: $bg-color;
+}
