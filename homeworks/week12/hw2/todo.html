@@ -18,6 +18,11 @@
       $('.btn-add').click(function() {
         //拿到輸入框input的值
         let todoValue = $('.todo-input').val() 
+        //空值判斷
+        if (todoValue == '') {
+          alert ('請輸入你還沒做完的事')
+          return
+        }
         $('.todo-input').val('')//清空輸入格 設定成val('')
         //放進下方待辦清單
         $('.todos').append(`<div class="todo m-1">
@@ -28,11 +33,18 @@
           <input class="edit-input hide" >
           <button class ="btn-editdone hide btn btn-info" >完成</button>
         </div>`)
-      })
+        $('.todo').each((i,el) => { // ==click [全部] 解決在已完成狀態加新項目會出現在已完成狀態
+            $(el).removeClass('hide')
+          })
+        })
       
-      //功能：清除全部
+      //功能：清除已做完
       $('.btn-deleteall').click(function(){
-        $('.todo').remove()
+        $('.todo').each((i,el) => {
+            if ($(el).hasClass('done')) {
+              $(el).remove()
+            }
+        })
       })
 
       //功能：刪除 
