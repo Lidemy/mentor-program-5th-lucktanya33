@@ -8,6 +8,37 @@ const headers = {
   'Accept': 'application/vnd.twitchtv.v5+json'// twitch規定 // Unnecessarily quoted property 'Accept' found
 }
 
+// -函式-渲染實況
+function render(data) {
+  for (let i = 0; i <= 19; i++) {
+    const { profile_banner, logo, status, name, url } = data.streams[i].channel
+    const top20Template = `<div class="block debug">
+      <div class="profile__banner debug">
+        <a href="${url}" class="profile__banner debug" target="_blank">
+          <img src="${profile_banner}" alt="Well...shit happens.">
+        </a>
+      </div>
+      <div class="bottom debug">
+        <div class="logo debug">
+          <img src ="${logo}" alt="Well...shit happens.">
+        </div>
+        <div class="info debug">
+          <div class="descrp debug">
+          ${status}
+          </div>
+          <div class="name debug">
+          ${name}
+          </div>
+        </div>
+      </div>
+      </div>`
+    const main = document.querySelector('.main')// 宣告要改動的地方
+    const div = document.createElement('div')// div變數是用dom新增的
+    main.appendChild(div)// 在main這個區塊中新增一個div
+    div.outerHTML = top20Template
+  }
+}
+
 // 功能1--前五的遊戲放在nav
 fetch(`${url}/games/top?limit=5`, {
 /* eslint-disable object-shorthand */
@@ -32,34 +63,7 @@ fetch(`${url}/streams/?games`, {
 })
   .then((response) => response.json())
   .then((json) => {
-    console.log(json)
-    for (let i = 0; i <= 19; i++) {
-      const { profile_banner, logo, status, name, url } = json.streams[i].channel
-      const top20Template = `<div class="block debug">
-        <div class="profile__banner debug">
-          <a href="${url}" class="profile__banner debug" target="_blank">
-            <img src="${profile_banner}" alt="Well...shit happens.">
-          </a>
-        </div>
-        <div class="bottom debug">
-          <div class="logo debug">
-            <img src ="${logo}" alt="Well...shit happens.">
-          </div>
-          <div class="info debug">
-            <div class="descrp debug">
-            ${status}
-            </div>
-            <div class="name debug">
-            ${name}
-            </div>
-          </div>
-        </div>
-        </div>`
-      const main = document.querySelector('.main')// 宣告要改動的地方
-      const div = document.createElement('div')// div變數是用dom新增的
-      main.appendChild(div)// 在main這個區塊中新增一個div
-      div.outerHTML = top20Template
-    }
+    render(json) // 把json資料傳進去render函式渲染畫面
   })
 
 // 功能3 點擊某一個nav的前五名-> 1.h1就換成遊戲名稱 2.主要畫面換該遊戲前20直播畫面
@@ -81,33 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((response) => response.json())
         .then((json20streams) => {
           console.log(json20streams)
-          for (let i = 0; i <= 19; i++) {
-            console.log(json20streams.streams[i].game)
-            const { profile_banner, logo, status, name, url } = json20streams.streams[i].channel
-            const main = document.querySelector('.main')// 宣告要改動的地方
-            const div = document.createElement('div')// div變數是用dom新增的
-            main.appendChild(div)// 在main這個區塊中新增一個div
-            div.outerHTML = `<div class="block debug">
-            <div class="profile__banner debug">
-              <a href="${url}" class="profile__banner debug" target="_blank">
-                <img src="${profile_banner}" alt="哇勒圖片怪怪的">
-              </a>
-            </div>
-            <div class="bottom debug">
-              <div class="logo debug">
-                <img src ="${logo}" alt="哇勒圖片怪怪的">
-              </div>
-              <div class="info debug">
-                <div class="descrp debug">
-                ${status}
-                </div>
-                <div class="name debug">
-                ${name}
-                </div>
-              </div>
-            </div>
-          </div>`
-          }
+          render(json20streams)
         })
     }
   })
