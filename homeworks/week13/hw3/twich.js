@@ -57,7 +57,6 @@ fetch(`${url}/games/top?limit=5`, {
 
 // 功能--2 顯示全部遊戲前20名直播畫面
 fetch(`${url}/streams/?games`, {
-  /* eslint-disable object-shorthand */
   method: 'GET',
   headers: headers
 })
@@ -78,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.main').innerHTML = ''// 清空main裡面的內容
 
       fetch(`${url}/streams/?game=${encodeGamename}`, {
-        /* eslint-disable object-shorthand */
         method: 'GET',
         headers: headers
       })
