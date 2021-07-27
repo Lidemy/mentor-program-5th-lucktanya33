@@ -1,5 +1,6 @@
-// fetch 串接 twitch API
+/* eslint-disable camelcase */
 /* eslint-disable quote-props */
+// fetch 串接 twitch API
 const url = 'https://api.twitch.tv/kraken'
 const headers = {
   'Content-Type': 'application/json',
@@ -25,38 +26,35 @@ fetch(`${url}/games/top?limit=5`, {
 
 // 功能--2 顯示全部遊戲前20名直播畫面
 fetch(`${url}/streams/?games`, {
-/* eslint-disable object-shorthand */
+  /* eslint-disable object-shorthand */
   method: 'GET',
   headers: headers
 })
   .then((response) => response.json())
   .then((json) => {
+    console.log(json)
     for (let i = 0; i <= 19; i++) {
-      const bannerData = json.streams[i].channel.profile_banner
-      const logoData = json.streams[i].channel.logo
-      const descrpData = json.streams[i].channel.status
-      const nameData = json.streams[i].channel.name
-      const urlData = json.streams[i].channel.url// 拿到直播連結網址
+      const { profile_banner, logo, status, name, url } = json.streams[i].channel
       const top20Template = `<div class="block debug">
-      <div class="profile__banner debug">
-        <a href="${urlData}" class="profile__banner debug" target="_blank">
-          <img src="${bannerData}" alt="Well...shit happens.">
-        </a>
-      </div>
-      <div class="bottom debug">
-        <div class="logo debug">
-          <img src ="${logoData}" alt="Well...shit happens.">
+        <div class="profile__banner debug">
+          <a href="${url}" class="profile__banner debug" target="_blank">
+            <img src="${profile_banner}" alt="Well...shit happens.">
+          </a>
         </div>
-        <div class="info debug">
-          <div class="descrp debug">
-          ${descrpData}
+        <div class="bottom debug">
+          <div class="logo debug">
+            <img src ="${logo}" alt="Well...shit happens.">
           </div>
-          <div class="name debug">
-          ${nameData}
+          <div class="info debug">
+            <div class="descrp debug">
+            ${status}
+            </div>
+            <div class="name debug">
+            ${name}
+            </div>
           </div>
         </div>
-      </div>
-      </div>`
+        </div>`
       const main = document.querySelector('.main')// 宣告要改動的地方
       const div = document.createElement('div')// div變數是用dom新增的
       main.appendChild(div)// 在main這個區塊中新增一個div
@@ -85,30 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(json20streams)
           for (let i = 0; i <= 19; i++) {
             console.log(json20streams.streams[i].game)
-            const bannerData = json20streams.streams[i].channel.profile_banner
-            const logoData = json20streams.streams[i].channel.logo
-            const descrpData = json20streams.streams[i].channel.status
-            const nameData = json20streams.streams[i].channel.name
-            const urlData = json20streams.streams[i].channel.url// 拿到直播連結網址
+            const { profile_banner, logo, status, name, url } = json20streams.streams[i].channel
             const main = document.querySelector('.main')// 宣告要改動的地方
             const div = document.createElement('div')// div變數是用dom新增的
             main.appendChild(div)// 在main這個區塊中新增一個div
             div.outerHTML = `<div class="block debug">
             <div class="profile__banner debug">
-              <a href="${urlData}" class="profile__banner debug" target="_blank">
-                <img src="${bannerData}" alt="哇勒圖片怪怪的">
+              <a href="${url}" class="profile__banner debug" target="_blank">
+                <img src="${profile_banner}" alt="哇勒圖片怪怪的">
               </a>
             </div>
             <div class="bottom debug">
               <div class="logo debug">
-                <img src ="${logoData}" alt="哇勒圖片怪怪的">
+                <img src ="${logo}" alt="哇勒圖片怪怪的">
               </div>
               <div class="info debug">
                 <div class="descrp debug">
-                ${descrpData}
+                ${status}
                 </div>
                 <div class="name debug">
-                ${nameData}
+                ${name}
                 </div>
               </div>
             </div>
