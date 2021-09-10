@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+<!--head 資訊-->  
+  <%- include('template/head') %>
+</head>
+<html>
+<!--導覽列-->  
+<%- include('template/navbar') %>
+<!--內容區-->
+<div class="container">
+  <h2>所有的文章內容</h2>
+  <% Articles.forEach(function(article) { %>
+    <div class="card w-100 m-3" style="width: 18rem;">
+        <div class="card-header d-flex justify-content-between">
+          <span><%= article.title %></span>
+          <span>作者：<%= article.User.nickname %></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">文章內容 (content)</h5>
+          <p class="card-text"><%= article.content %></p>
+          <% if(role === 2) { %>
+            <a href="/update_articles/<%= article.id %>">編輯</a>
+            <a href="/delete_articles/<%= article.id %>">刪除</a>
+          <% } %>
+          <% if(username === article.User.username) { %>
+            <a href="/update_articles/<%= article.id %>">編輯</a>
+            <a href="/delete_articles/<%= article.id %>">刪除</a>
+          <% } %>
+      </div>
+    </div>  
+  <% })%>
+</div>
+</html>

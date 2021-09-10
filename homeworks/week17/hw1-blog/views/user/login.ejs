@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+  <%- include('../template/head') %>
+</head>
+<html>
+<%- include('../template/navbar') %>
+<div class="container">
+<h1>登入頁面</h1>
+<h2></h2>
+<% if (errorMessage && errorMessage.length > 0) { %> <%# errorMessage ===[] 沒有錯誤時仍然有值 %>
+  <div class="alert alert-danger" role="alert">
+    <%= errorMessage %>
+  </div>
+<% } %>
+<form method="POST" action="/login">
+  <div class="form-group">
+    <label for="formGroupExampleInput">Username</label>
+    <input type="text" name="username" class="form-control" id="formGroupExampleInput" >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Password</label>
+    <input type="password" name="password" class="form-control" id="formGroupExampleInput3">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</html>

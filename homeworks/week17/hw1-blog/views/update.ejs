@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<!--head 資訊-->  
+  <%- include('template/head') %>
+</head>
+<html>
+<!--導覽列-->  
+<%- include('template/navbar') %>
+<div class="container">
+  <h1> 編輯文章 </h1>
+  <% if(username === article.User.username || role === 2) { %>
+  <form method="POST" action="/update_articles/<%= article.id%>">
+    <div class="form-group">
+    <h5 class="card-text">文章標題</h5>
+    <textarea name="title" class="form-control"><%= article.title%></textarea>
+    <h5 class="card-text">文章內容</h5>
+    <textarea name="content" class="form-control"><%= article.content%></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">修改</button>
+  </form>
+  <% } else {%>
+  <script>
+    window.location.href='http://localhost:5001/';
+  </script>
+  <% } %>
+</div>
+</html>
